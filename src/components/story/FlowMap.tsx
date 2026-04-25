@@ -38,13 +38,12 @@ function formatTon(n: number): string {
 
 function getChoroplethColor(plastic: number): string {
   const t = plastic / MAX_PLASTIC;
-  if (t > 0.85) return "oklch(0.62 0.20 195)";
-  if (t > 0.65) return "oklch(0.55 0.17 200)";
-  if (t > 0.50) return "oklch(0.48 0.15 205)";
-  if (t > 0.35) return "oklch(0.42 0.13 208)";
-  if (t > 0.20) return "oklch(0.36 0.10 212)";
-  if (t > 0.08) return "oklch(0.31 0.07 218)";
-  return               "oklch(0.26 0.04 225)";
+  if (t > 0.85) return "#d74f3e"; // Sangat Tinggi (Merah bata / Coral tua)
+  if (t > 0.65) return "#ee734a"; // Tinggi
+  if (t > 0.40) return "#fa9560"; // Sedang
+  if (t > 0.20) return "#febb7f"; // Rendah
+  if (t > 0.08) return "#ffd7a5"; // Sangat Rendah
+  return               "#ffebd1"; // Minimal (Peach pucat)
 }
 
 interface TooltipCb {
@@ -70,14 +69,14 @@ const MapLayer = memo(function MapLayer({ onMouseMove, onMouseLeave }: TooltipCb
 
             const baseFill = inSEA && data
               ? getChoroplethColor(data.plastic)
-              : "oklch(0.20 0.04 240)";
+              : "#0f354a"; // Background color untuk negara bukan SEA
 
             return (
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
                 fill={baseFill}
-                stroke="oklch(0.35 0.05 240 / 60%)"
+                stroke="#2376a1"
                 strokeWidth={0.5}
                 style={{
                   default: {
@@ -87,8 +86,8 @@ const MapLayer = memo(function MapLayer({ onMouseMove, onMouseLeave }: TooltipCb
                   hover: {
                     outline: "none",
                     fill: inSEA && data
-                      ? "oklch(0.75 0.18 185)"
-                      : "oklch(0.22 0.04 240)",
+                      ? "#ffe7b8" // Warna kuning/peach terang saat di-hover
+                      : "#0f354a",
                     cursor: inSEA ? "pointer" : "default",
                   },
                   pressed: { outline: "none" },

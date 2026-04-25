@@ -47,22 +47,13 @@ export function Closing() {
            whileInView={{ opacity: 1, y: 0 }}
            viewport={{ once: true }}
            transition={{ duration: 1, delay: 0.8 }}
-           className="mt-12 flex flex-col items-center gap-4 text-left border border-border bg-card/60 p-8 rounded-lg backdrop-blur"
+           className="mt-16 flex flex-col items-center gap-6 text-center"
         >
-          <p className="font-mono text-sm tracking-widest text-primary mb-2 uppercase">Langkah Rekomendasi</p>
-          <ul className="space-y-4 font-mono text-muted-foreground">
-            <li className="flex items-center gap-3">
-              <span className="h-5 w-5 flex items-center justify-center rounded-full bg-primary/20 text-primary">1</span>
-              Perluas pengumpulan sampah primer di sumbernya.
-            </li>
-            <li className="flex items-center gap-3">
-              <span className="h-5 w-5 flex items-center justify-center rounded-full bg-primary/20 text-primary">2</span>
-              Tingkatkan daur ulang plastik secara komprehensif.
-            </li>
-            <li className="flex items-center gap-3">
-              <span className="h-5 w-5 flex items-center justify-center rounded-full bg-primary/20 text-primary">3</span>
-              Bersihkan sistem drainase secara rutin dari sumbatan.
-            </li>
+          <p className="font-mono text-xs tracking-[0.2em] text-primary uppercase opacity-80">Langkah Rekomendasi</p>
+          <ul className="space-y-4 font-sans text-sm md:text-base text-muted-foreground/80 max-w-md">
+            <li>1. Perluas pengumpulan sampah primer di sumbernya.</li>
+            <li>2. Tingkatkan daur ulang plastik secara komprehensif.</li>
+            <li>3. Bersihkan sistem drainase secara rutin dari sumbatan.</li>
           </ul>
         </motion.div>
 
@@ -79,10 +70,11 @@ export function Closing() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1.2, delay: 1.4 }}
-          className="mt-16 max-w-xl font-display text-2xl italic leading-relaxed text-muted-foreground sm:text-3xl"
+          className="mt-16 max-w-2xl font-display text-2xl italic leading-relaxed text-muted-foreground sm:text-3xl"
         >
           Keputusan keliru hari ini akan ditanggung oleh laut. <br />
-          Dan apa yang ditanggung laut, <span className="text-danger italic font-semibold">akan meracuni piring anak cucu kita</span>.
+          Dan apa yang ditanggung laut, <br className="md:hidden" />
+          <span className="text-danger italic font-medium">akan meracuni piring anak cucu kita</span>.
         </motion.p>
 
         <motion.p
