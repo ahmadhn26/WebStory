@@ -3,10 +3,10 @@ import fishImg from "@/assets/contaminated-fish.png";
 import { Reveal } from "./Reveal";
 
 const timeline = [
-  { time: "Dibuang", label: "Akhir yang Semu", note: "Sampah plastik mengakhiri fungsinya di darat, namun baru memulai perjalanannya menuju sungai dan laut lepas.", icon: "♺" },
-  { time: "Mengurai", label: "Mengecil, Bukan Hilang", note: "Dihantam ombak dan radiasi UV, plastik tidak hancur, melainkan terpecah menjadi mikroplastik yang tak kasat mata.", icon: "▤" },
-  { time: "Diperangkap", label: "Jebakan Tersembunyi", note: "Ikan-ikan menelan mikroplastik dan polutan kimia yang menyerupai plankton di dasar rantai makanan.", icon: "◐" },
-  { time: "Tersaji", label: "Kembali kepada Kita", note: "Ikan yang kita anggap bergizi, kini membawa racun yang mengendap dalam tubuh manusia.", icon: "↺" },
+  { time: "Dibuang", label: "Akhir yang Semu", note: "Plastik berakhir di darat, lalu hanyut ke laut lepas.", icon: "♺" },
+  { time: "Mengurai", label: "Mengecil, Bukan Hilang", note: "Hantaman ombak dan UV memecahnya menjadi mikroplastik tak kasat mata.", icon: "▤" },
+  { time: "Diperangkap", label: "Jebakan Tersembunyi", note: "Ikan menelan mikroplastik beracun yang menyerupai plankton.", icon: "◐" },
+  { time: "Tersaji", label: "Kembali kepada Kita", note: "Racun tersebut akhirnya mengendap dalam tubuh kita sendiri.", icon: "↺" },
 ];
 
 export function PersonalStory() {
@@ -20,7 +20,7 @@ export function PersonalStory() {
               Kita tidak bisa lari dari <span className="italic">apa yang kita buang</span>.
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
-              Dalam kesunyian laut dalam, kerusakan terburuk terjadi tanpa suara. Berdasarkan penelitian (Apriliani, 2024), <span className="text-foreground font-medium">80% dari ikan yang dikonsumsi di Indonesia</span> telah terkontaminasi mikroplastik. Rantai makanan yang kita rusak, kini kembali merusak kita.
+              Berdasarkan penelitian (Apriliani, 2024), <span className="text-foreground font-medium">80% ikan konsumsi di Indonesia</span> telah terkontaminasi mikroplastik.
             </p>
             <div className="mt-10 overflow-hidden rounded-md">
               <img

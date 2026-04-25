@@ -1,76 +1,213 @@
-import { motion } from "framer-motion";
+import { useState, useCallback, memo } from "react";
+import {
+  ComposableMap,
+  Geographies,
+  Geography,
+} from "react-simple-maps";
+import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "./Reveal";
 
-// Stylised map: Southeast Asia nodes
-// Data: Fish Production in Southeast Asia (2023)
-const SEA_CENTER = { x: 400, y: 240 }; // Center roughly
-const COUNTRIES = [
-  { name: "Indonesia", x: 400, y: 350, vol: 21, rank: 1 },
-  { name: "Vietnam", x: 250, y: 150, vol: 8, rank: 2 },
-  { name: "Philippines", x: 550, y: 180, vol: 4, rank: 3 },
-];
+const GEO_URL =
+  "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
+
+// Data Konsumsi Plastik Nasional — Negara Asia Tenggara (Ton) 2023
+const SEA_DATA: Record<string, { plastic: number; iso: string }> = {
+  Indonesia:   { plastic: 3_400_000, iso: "360" },
+  Thailand:    { plastic: 3_400_000, iso: "764" },
+  Vietnam:     { plastic: 3_000_000, iso: "704" },
+  Malaysia:    { plastic: 1_400_000, iso: "458" },
+  Philippines: { plastic:   938_200, iso: "608" },
+  Singapore:   { plastic:   593_900, iso: "702" },
+  Myanmar:     { plastic:   498_400, iso: "104" },
+  Cambodia:    { plastic:    93_700, iso: "116" },
+  Brunei:      { plastic:    34_600, iso: "096" },
+  Laos:        { plastic:    21_500, iso: "418" },
+};
+
+const ISO_TO_NAME: Record<string, string> = Object.fromEntries(
+  Object.entries(SEA_DATA).map(([name, d]) => [d.iso, name])
+);
+const SEA_ISO_SET = new Set(Object.values(SEA_DATA).map((d) => d.iso));
+const MAX_PLASTIC = Math.max(...Object.values(SEA_DATA).map((d) => d.plastic));
+
+function formatTon(n: number): string {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(2)} Juta Ton`;
+  if (n >= 1_000)     return `${(n / 1_000).toFixed(1)} Ribu Ton`;
+  return `${n} Ton`;
+}
+
+function getChoroplethColor(plastic: number): string {
+  const t = plastic / MAX_PLASTIC;
+  if (t > 0.85) return "oklch(0.62 0.20 195)";
+  if (t > 0.65) return "oklch(0.55 0.17 200)";
+  if (t > 0.50) return "oklch(0.48 0.15 205)";
+  if (t > 0.35) return "oklch(0.42 0.13 208)";
+  if (t > 0.20) return "oklch(0.36 0.10 212)";
+  if (t > 0.08) return "oklch(0.31 0.07 218)";
+  return               "oklch(0.26 0.04 225)";
+}
+
+interface TooltipCb {
+  onMouseMove: (name: string, plastic: number, e: React.MouseEvent<SVGPathElement>) => void;
+  onMouseLeave: () => void;
+}
+
+// ─── Map layer memoised: TIDAK re-render saat tooltip state berubah ──────────
+const MapLayer = memo(function MapLayer({ onMouseMove, onMouseLeave }: TooltipCb) {
+  return (
+    <ComposableMap
+      projection="geoMercator"
+      projectionConfig={{ scale: 700, center: [113, 5] }}
+      style={{ width: "100%", height: "520px" }}
+    >
+      <Geographies geography={GEO_URL}>
+        {({ geographies }: { geographies: any[] }) =>
+          geographies.map((geo: any) => {
+            const isoNum = String(geo.id);
+            const inSEA  = SEA_ISO_SET.has(isoNum);
+            const name   = ISO_TO_NAME[isoNum];
+            const data   = name ? SEA_DATA[name] : undefined;
+
+            const baseFill = inSEA && data
+              ? getChoroplethColor(data.plastic)
+              : "oklch(0.20 0.04 240)";
+
+            return (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill={baseFill}
+                stroke="oklch(0.35 0.05 240 / 60%)"
+                strokeWidth={0.5}
+                style={{
+                  default: {
+                    outline: "none",
+                    transition: "fill 0.25s ease",
+                  },
+                  hover: {
+                    outline: "none",
+                    fill: inSEA && data
+                      ? "oklch(0.75 0.18 185)"
+                      : "oklch(0.22 0.04 240)",
+                    cursor: inSEA ? "pointer" : "default",
+                  },
+                  pressed: { outline: "none" },
+                }}
+                onMouseMove={
+                  inSEA && name && data
+                    ? (e: React.MouseEvent<SVGPathElement>) => onMouseMove(name, data.plastic, e)
+                    : undefined
+                }
+                onMouseLeave={inSEA ? onMouseLeave : undefined}
+              />
+            );
+          })
+        }
+      </Geographies>
+    </ComposableMap>
+  );
+});
+// ─────────────────────────────────────────────────────────────────────────────
+
+interface Tooltip { name: string; plastic: number; x: number; y: number }
 
 export function FlowMap() {
-  const maxVol = Math.max(...COUNTRIES.map((c) => c.vol));
+  const [tooltip, setTooltip] = useState<Tooltip | null>(null);
+
+  // Stable callbacks — tidak berubah antar render → MapLayer tidak re-render
+  const handleMouseMove = useCallback(
+    (name: string, plastic: number, e: React.MouseEvent<SVGPathElement>) => {
+      const svg  = e.currentTarget.closest("svg");
+      if (!svg) return;
+      const rect = svg.getBoundingClientRect();
+      setTooltip({ name, plastic, x: e.clientX - rect.left, y: e.clientY - rect.top });
+    },
+    []
+  );
+
+  const handleMouseLeave = useCallback(() => setTooltip(null), []);
+
+  const ranked = Object.entries(SEA_DATA).sort((a, b) => b[1].plastic - a[1].plastic);
 
   return (
     <section className="bg-background py-32">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">Babak 03 · Pusat Produksi</p>
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
+            Babak 03 · Peta Konsumsi Plastik
+          </p>
           <h2 className="mt-4 max-w-3xl font-display text-4xl leading-tight text-foreground md:text-6xl">
-            Lumbung <span className="italic">Asia Tenggara</span>.
+            Plastik di <span className="italic">Asia Tenggara</span>.
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Sebagai negara kepulauan, perairan Indonesia menjadi salah satu yang tersibuk di dunia. Indonesia memproduksi <span className="text-foreground font-medium">21 Juta Ton</span> ikan pada tahun 2023, jauh melampaui tetangganya. Angka yang fantastis ini berada di ujung tanduk krisis mikroplastik.
+            Di seluruh kawasan, plastik mengalir deras setiap hari. Indonesia dan Thailand memimpin
+            di angka <span className="text-foreground font-medium">3,4 juta ton</span>, diikuti Vietnam dan Malaysia.
           </p>
         </Reveal>
 
         <Reveal delay={0.2}>
-          <div className="mt-16 overflow-hidden rounded-md border border-border bg-card/40 p-4">
-            <svg viewBox="100 100 600 400" className="h-auto w-full" style={{ maxHeight: 560 }}>
-              {/* Nodes and halos */}
-              {COUNTRIES.map((c, i) => {
-                const radius = (c.vol / maxVol) * 60 + 20; // scale up to 80px
-                return (
-                  <g key={`node-${c.name}`}>
-                    <circle cx={c.x} cy={c.y} r={radius} fill="var(--color-fish)" fillOpacity={0.15} />
-                    <circle cx={c.x} cy={c.y} r={radius * 0.5} fill="var(--color-fish)" fillOpacity={0.3} />
-                    <circle cx={c.x} cy={c.y} r={12} fill="var(--color-fish)" />
-                    
-                    <motion.circle
-                      cx={c.x} cy={c.y} r={radius + 10}
-                      fill="none" stroke="var(--color-fish)" strokeOpacity={0.5} strokeDasharray="4 4"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                      style={{ originX: `${c.x}px`, originY: `${c.y}px` }}
-                    />
+          {/* Wrapper peta + tooltip overlay */}
+          <div className="relative mt-12 overflow-hidden rounded-xl border border-border bg-card/30 backdrop-blur">
 
-                    <text
-                      x={c.x}
-                      y={c.y - radius - 20}
-                      textAnchor="middle"
-                      className="fill-foreground font-display"
-                      fontSize="22"
-                    >
-                      {c.name}
-                    </text>
-                    <text
-                      x={c.x}
-                      y={c.y - radius - 5}
-                      textAnchor="middle"
-                      className="fill-muted-foreground font-mono"
-                      fontSize="14"
-                    >
-                      {c.vol} Juta Ton (# {c.rank})
-                    </text>
-                  </g>
-                );
-              })}
-            </svg>
+            {/* Tooltip — hanya div ini yang re-render saat hover */}
+            <AnimatePresence>
+              {tooltip && (
+                <motion.div
+                  key="tip"
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 6 }}
+                  transition={{ duration: 0.12 }}
+                  className="pointer-events-none absolute z-20 rounded-lg border border-border bg-card px-4 py-3 shadow-xl"
+                  style={{
+                    left: tooltip.x,
+                    top: tooltip.y - 80,
+                    transform: "translateX(-50%)",
+                  }}
+                >
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-primary mb-1">
+                    {tooltip.name}
+                  </p>
+                  <p className="font-display text-xl text-foreground leading-tight">
+                    {formatTon(tooltip.plastic)}
+                  </p>
+                  <p className="font-mono text-[9px] text-muted-foreground mt-1 uppercase tracking-wider">
+                    Konsumsi Plastik Nasional
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
+
+            {/* MapLayer — TIDAK re-render saat tooltip berubah */}
+            <MapLayer onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave} />
           </div>
-          <p className="mt-4 text-center font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            Produksi Ikan Terbesar di Asia Tenggara · Sumber: ReportLinker, 2023
+
+          {/* Legenda ranking */}
+          <div className="mt-6 grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-5">
+            {ranked.map(([name, d], i) => (
+              <div
+                key={name}
+                className="flex items-center gap-2 rounded-md border border-border bg-card/30 px-3 py-2"
+              >
+                <span
+                  className="h-3 w-3 shrink-0 rounded-sm"
+                  style={{ background: getChoroplethColor(d.plastic) }}
+                />
+                <div className="min-w-0">
+                  <p className="font-mono text-[10px] uppercase tracking-wide text-muted-foreground truncate">
+                    #{i + 1} {name}
+                  </p>
+                  <p className="font-mono text-[10px] text-foreground">
+                    {formatTon(d.plastic)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            Konsumsi Plastik Nasional (Ton) · Data Primer Penelitian · Asia Tenggara
+            · Hover negara untuk detail
           </p>
         </Reveal>
       </div>

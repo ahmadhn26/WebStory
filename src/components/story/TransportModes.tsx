@@ -1,89 +1,107 @@
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip, Cell, LabelList } from "recharts";
 import { motion } from "framer-motion";
-import { Droplet, Box } from "lucide-react";
 import { Reveal } from "./Reveal";
+
+// Data Category Item (2023)
+const data = [
+  { name: "Plastic", value: 98.19, amount: 5617 },
+  { name: "Foam", value: 1.13, amount: 65 },
+  { name: "Cigarette", value: 0.44, amount: 25 },
+  { name: "Paper", value: 0.23, amount: 13 },
+];
+
+const COLORS = [
+  "var(--color-coral)", 
+  "var(--color-water)", 
+  "var(--color-muted-foreground)", 
+  "var(--color-border)"
+];
+
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length) {
+    const data = payload[0].payload;
+    return (
+      <div className="rounded-lg border border-border bg-card p-3 shadow-xl font-mono text-xs text-foreground">
+        <p className="font-bold text-primary mb-1 uppercase tracking-widest">{data.name}</p>
+        <p className="text-muted-foreground">Persentase: <span className="text-foreground">{data.value}%</span></p>
+        <p className="text-muted-foreground mt-1">Ditemukan: <span className="text-foreground">{data.amount} Unit</span></p>
+      </div>
+    );
+  }
+  return null;
+};
 
 export function TransportModes() {
   return (
     <section className="border-b border-border bg-gradient-to-b from-card/20 to-background py-32 text-foreground">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">Babak 06 · Jenis Puing Laut</p>
-          <h2 className="mt-4 max-w-3xl font-display text-4xl leading-tight text-foreground md:text-6xl">
-            Lautan kita menelan <br />
-            <span className="italic text-gradient-blood">apa saja?</span>
-          </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Plastik bukan satu-satunya racun buatan yang mengendap, namun ia adalah <span className="text-foreground font-medium">sang dominator mutlak</span>. Keabadian senyawa plastiknya menjadi ironi terbesar bagi sebuah produk sekali pakai.
-          </p>
-        </Reveal>
-
-        <Reveal delay={0.2}>
-          <div className="mt-16 grid gap-12 md:grid-cols-2 items-center">
-            {/* Visualisasi Plastik */}
-            <div className="space-y-8">
-              <div>
-                <div className="flex items-end justify-between font-mono mb-2">
-                  <div className="flex items-center gap-2 text-foreground">
-                    <Droplet className="w-5 h-5 text-coral" />
-                    <span>Plastik</span>
-                  </div>
-                  <span className="text-2xl text-coral tracking-widest">627.80 g/m²</span>
-                </div>
-                <div className="h-4 w-full bg-card rounded-full overflow-hidden">
-                  <motion.div 
-                    initial={{ width: 0 }}
-                    whileInView={{ width: "90%" }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
-                    className="h-full bg-coral"
-                  />
-                </div>
-              </div>
+          <div className="flex flex-col md:flex-row gap-12 items-center">
+            <div className="flex-1 space-y-6">
+              <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">Babak 06 · Jenis Puing Laut</p>
+              <h2 className="font-display text-4xl leading-tight text-foreground md:text-5xl">
+                Lautan kita menelan <br />
+                <span className="italic text-gradient-blood">apa saja?</span>
+              </h2>
+              <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
+                Ada berbagai jenis sampah di perairan kita, namun <span className="text-foreground font-medium">plastik adalah dominator mutlak</span>.
+              </p>
               
-              <div>
-                <div className="flex items-end justify-between font-mono mb-2">
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <Box className="w-5 h-5" />
-                    <span>Material Lainnya</span>
-                  </div>
-                  <span className="text-xl text-muted-foreground">Sebagian Kecil</span>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="rounded-lg border border-border bg-card/40 p-6 backdrop-blur max-w-sm"
+              >
+                <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4">
+                  Klaim Monopoli:
+                </p>
+                <div className="flex items-baseline gap-2">
+                  <span className="font-display text-5xl md:text-6xl text-coral">98.2<span className="text-3xl text-muted-foreground">%</span></span>
                 </div>
-                <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mt-2">
-                  <span className="px-2 py-1 rounded bg-card/60">Kayu</span>
-                  <span className="px-2 py-1 rounded bg-card/60">Karet</span>
-                  <span className="px-2 py-1 rounded bg-card/60">Kaca & Keramik</span>
-                  <span className="px-2 py-1 rounded bg-card/60">Logam</span>
-                  <span className="px-2 py-1 rounded bg-card/60">Busa (Foam)</span>
-                  <span className="px-2 py-1 rounded bg-card/60">Kain</span>
-                  <span className="px-2 py-1 rounded bg-card/60">Kertas</span>
-                </div>
-              </div>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                  Dari seluruh sampel sampah yang diuji, plastik mendominasi mutlak secara abadi, menolak mati dan mengancam menjadi mikroplastik mematikan.
+                </p>
+              </motion.div>
             </div>
 
-            {/* Kotak Alasan */}
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="rounded-lg border border-border bg-card/40 p-8 backdrop-blur"
-            >
-              <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4">
-                Sang Dominator Tak Terkalahkan:
+            {/* Visualisasi BarChart */}
+            <div className="flex-1 w-full h-[400px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={data} margin={{ top: 30, right: 0, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--color-border)" />
+                  <XAxis 
+                    dataKey="name" 
+                    tick={{ fill: "var(--color-muted-foreground)", fontFamily: "var(--font-mono)", fontSize: 11 }} 
+                    axisLine={{ stroke: "var(--color-border)" }}
+                    tickLine={false}
+                    tickMargin={12}
+                  />
+                  <YAxis 
+                    tick={{ fill: "var(--color-muted-foreground)", fontFamily: "var(--font-mono)", fontSize: 11 }} 
+                    axisLine={false} 
+                    tickLine={false}
+                    tickFormatter={(val) => `${val}%`}
+                  />
+                  <Tooltip content={<CustomTooltip />} cursor={{ fill: "var(--color-card)", opacity: 0.5 }} />
+                  <Bar dataKey="value" radius={[4, 4, 0, 0]} maxBarSize={60}>
+                    {data.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                    ))}
+                    <LabelList 
+                      dataKey="value" 
+                      position="top" 
+                      formatter={(val: number) => `${val}%`}
+                      style={{ fill: "var(--color-foreground)", fontFamily: "var(--font-mono)", fontSize: "10px" }}
+                    />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+              <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+                Persentase Kategori Sampah yang Ditemukan (2023)
               </p>
-              <div className="flex items-baseline gap-4">
-                <span className="font-display text-5xl md:text-6xl text-coral">627.80<span className="text-3xl items-end text-muted-foreground ml-2">g/m²</span></span>
-              </div>
-              <p className="mt-4 font-display text-2xl text-foreground">
-                "Beban Setiap Meter Persegi"
-              </p>
-              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                Dari pesisir dangkal hingga palung terdalam, densitas sampah di wilayah perairan Indonesia didominasi secara paksa oleh material plastik. Kaca, logam, maupun kayu dapat kembali ke pelukan alam seiring waktu, tetapi plastik hanyalah benda asing yang menolak mati.
-              </p>
-              <p className="mt-6 font-mono text-[10px] uppercase tracking-widest text-muted-foreground border-t border-border pt-4">
-                Sumber: Types of Marine Debris, Divini, 2022
-              </p>
-            </motion.div>
+            </div>
           </div>
         </Reveal>
       </div>

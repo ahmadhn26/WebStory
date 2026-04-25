@@ -1,0 +1,276 @@
+{
+  "Agregat": [
+    {
+      "Country": "Bangladesh",
+      "Yearly Plastic Consumption Per Capita": 3.5,
+      "Ocean Trash Index": 9321,
+      "Fish Production": 4880744.0,
+      "Total Plastic Consumption": 579900
+    },
+    {
+      "Country": "Brunei",
+      "Yearly Plastic Consumption Per Capita": 78.3,
+      "Ocean Trash Index": 1889,
+      "Fish Production": 22370.45,
+      "Total Plastic Consumption": 34600
+    },
+    {
+      "Country": "Cambodia",
+      "Yearly Plastic Consumption Per Capita": 5.7,
+      "Ocean Trash Index": 862,
+      "Fish Production": 892752.0,
+      "Total Plastic Consumption": 93700
+    },
+    {
+      "Country": "China",
+      "Yearly Plastic Consumption Per Capita": 26.7,
+      "Ocean Trash Index": 19645,
+      "Fish Production": 89662525.0,
+      "Total Plastic Consumption": 37600000
+    },
+    {
+      "Country": "India",
+      "Yearly Plastic Consumption Per Capita": 5.3,
+      "Ocean Trash Index": 2544,
+      "Fish Production": 15633898.0,
+      "Total Plastic Consumption": 7400000
+    },
+    {
+      "Country": "Indonesia",
+      "Yearly Plastic Consumption Per Capita": 12.4,
+      "Ocean Trash Index": 12598,
+      "Fish Production": 21249690.0,
+      "Total Plastic Consumption": 3400000
+    },
+    {
+      "Country": "Israel",
+      "Yearly Plastic Consumption Per Capita": 105.5,
+      "Ocean Trash Index": 489,
+      "Fish Production": 16201.4,
+      "Total Plastic Consumption": 972000
+    },
+    {
+      "Country": "Japan",
+      "Yearly Plastic Consumption Per Capita": 30.2,
+      "Ocean Trash Index": 12475,
+      "Fish Production": 3987038.0,
+      "Total Plastic Consumption": 3800000
+    },
+    {
+      "Country": "Malaysia",
+      "Yearly Plastic Consumption Per Capita": 41.3,
+      "Ocean Trash Index": 48346,
+      "Fish Production": 1787174.0,
+      "Total Plastic Consumption": 1400000
+    },
+    {
+      "Country": "Maldives",
+      "Yearly Plastic Consumption Per Capita": 12.3,
+      "Ocean Trash Index": 71,
+      "Fish Production": 155876.0,
+      "Total Plastic Consumption": 6300
+    },
+    {
+      "Country": "Pakistan",
+      "Yearly Plastic Consumption Per Capita": 3.5,
+      "Ocean Trash Index": 65,
+      "Fish Production": 672141.4,
+      "Total Plastic Consumption": 790100
+    },
+    {
+      "Country": "Saudi Arabia",
+      "Yearly Plastic Consumption Per Capita": 58.5,
+      "Ocean Trash Index": 332,
+      "Fish Production": 216080.5,
+      "Total Plastic Consumption": 2100000
+    },
+    {
+      "Country": "Singapore",
+      "Yearly Plastic Consumption Per Capita": 104.4,
+      "Ocean Trash Index": 2664,
+      "Fish Production": 7095.95,
+      "Total Plastic Consumption": 593900
+    },
+    {
+      "Country": "Sri Lanka",
+      "Yearly Plastic Consumption Per Capita": 8.4,
+      "Ocean Trash Index": 11420,
+      "Fish Production": 519706.3,
+      "Total Plastic Consumption": 184200
+    },
+    {
+      "Country": "Thailand",
+      "Yearly Plastic Consumption Per Capita": 46.9,
+      "Ocean Trash Index": 22248,
+      "Fish Production": 2308267.0,
+      "Total Plastic Consumption": 3400000
+    },
+    {
+      "Country": "Philippines",
+      "Yearly Plastic Consumption Per Capita": 8.4,
+      "Ocean Trash Index": 444869,
+      "Fish Production": 4014862.0,
+      "Total Plastic Consumption": 938200
+    },
+    {
+      "Country": "United Arab Emirates",
+      "Yearly Plastic Consumption Per Capita": 116.3,
+      "Ocean Trash Index": 4603,
+      "Fish Production": 61847.59,
+      "Total Plastic Consumption": 1100000
+    },
+    {
+      "Country": "Vietnam",
+      "Yearly Plastic Consumption Per Capita": 30.5,
+      "Ocean Trash Index": 2501,
+      "Fish Production": 8786589.0,
+      "Total Plastic Consumption": 3000000
+    },
+    {
+      "Country": "Myanmar",
+      "Yearly Plastic Consumption Per Capita": 9.3,
+      "Ocean Trash Index": 0.5,
+      "Fish Production": 2215443.0,
+      "Total Plastic Consumption": 498400
+    },
+    {
+      "Country": "Laos",
+      "Yearly Plastic Consumption Per Capita": 2.9,
+      "Ocean Trash Index": "-",
+      "Fish Production": 213150.0,
+      "Total Plastic Consumption": 21500
+    }
+  ],
+  "SEA": [
+    {
+      "Country": "Brunei",
+      "Yearly Plastic Consumption Per Capita": 78.3,
+      "Ocean Trash Index": 1889,
+      "Fish Production": 22370.45,
+      "Total Plastic Consumption": 34600
+    },
+    {
+      "Country": "Cambodia",
+      "Yearly Plastic Consumption Per Capita": 5.7,
+      "Ocean Trash Index": 862,
+      "Fish Production": 892752.0,
+      "Total Plastic Consumption": 93700
+    },
+    {
+      "Country": "Indonesia",
+      "Yearly Plastic Consumption Per Capita": 12.4,
+      "Ocean Trash Index": 12598,
+      "Fish Production": 21249690.0,
+      "Total Plastic Consumption": 3400000
+    },
+    {
+      "Country": "Malaysia",
+      "Yearly Plastic Consumption Per Capita": 41.3,
+      "Ocean Trash Index": 48346,
+      "Fish Production": 1787174.0,
+      "Total Plastic Consumption": 1400000
+    },
+    {
+      "Country": "Singapore",
+      "Yearly Plastic Consumption Per Capita": 104.4,
+      "Ocean Trash Index": 2664,
+      "Fish Production": 7095.95,
+      "Total Plastic Consumption": 593900
+    },
+    {
+      "Country": "Thailand",
+      "Yearly Plastic Consumption Per Capita": 46.9,
+      "Ocean Trash Index": 22248,
+      "Fish Production": 2308267.0,
+      "Total Plastic Consumption": 3400000
+    },
+    {
+      "Country": "Philippines",
+      "Yearly Plastic Consumption Per Capita": 8.4,
+      "Ocean Trash Index": 444869,
+      "Fish Production": 4014862.0,
+      "Total Plastic Consumption": 938200
+    },
+    {
+      "Country": "Vietnam",
+      "Yearly Plastic Consumption Per Capita": 30.5,
+      "Ocean Trash Index": 2501,
+      "Fish Production": 8786589.0,
+      "Total Plastic Consumption": 3000000
+    },
+    {
+      "Country": "Myanmar",
+      "Yearly Plastic Consumption Per Capita": 9.3,
+      "Ocean Trash Index": 0.5,
+      "Fish Production": 2215443.0,
+      "Total Plastic Consumption": 498400
+    },
+    {
+      "Country": "Laos",
+      "Yearly Plastic Consumption Per Capita": 2.9,
+      "Ocean Trash Index": "-",
+      "Fish Production": 213150.0,
+      "Total Plastic Consumption": 21500
+    }
+  ],
+  "Kebocoran": [
+    {
+      "Kebocoran Sampah Plastik di Laut (ton)": "Tahun",
+      "Unnamed: 1": "Sampah Plastik Land-Base",
+      "Unnamed: 2": "Sampah Plastik Sea Base",
+      "Unnamed: 3": "Total Sampah Plastik"
+    },
+    {
+      "Kebocoran Sampah Plastik di Laut (ton)": 2018,
+      "Unnamed: 1": 538182.77,
+      "Unnamed: 2": 77491.86,
+      "Unnamed: 3": 615674.63
+    },
+    {
+      "Kebocoran Sampah Plastik di Laut (ton)": 2019,
+      "Unnamed: 1": 518357.16,
+      "Unnamed: 2": 47717.78,
+      "Unnamed: 3": 566074.94
+    },
+    {
+      "Kebocoran Sampah Plastik di Laut (ton)": 2020,
+      "Unnamed: 1": 508755.7,
+      "Unnamed: 2": 12784.97,
+      "Unnamed: 3": 521540.67
+    },
+    {
+      "Kebocoran Sampah Plastik di Laut (ton)": 2021,
+      "Unnamed: 1": 407217.62,
+      "Unnamed: 2": 32889.08,
+      "Unnamed: 3": 440106.7
+    },
+    {
+      "Kebocoran Sampah Plastik di Laut (ton)": 2022,
+      "Unnamed: 1": 309625.52,
+      "Unnamed: 2": 88374.63,
+      "Unnamed: 3": 398000.15
+    }
+  ],
+  "Kategori": [
+    {
+      "Category": "Cigarette butts",
+      "Jumlah (Unit": 25,
+      "Persentase per \nCategory": 0.004370629370629371
+    },
+    {
+      "Category": "Plastic",
+      "Jumlah (Unit": 5617,
+      "Persentase per \nCategory": 0.981993006993007
+    },
+    {
+      "Category": "Foam",
+      "Jumlah (Unit": 65,
+      "Persentase per \nCategory": 0.011363636363636364
+    },
+    {
+      "Category": "Paper",
+      "Jumlah (Unit": 13,
+      "Persentase per \nCategory": 0.0022727272727272726
+    }
+  ]
+}

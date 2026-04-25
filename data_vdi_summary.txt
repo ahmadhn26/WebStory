@@ -1,0 +1,67 @@
+Sheets: ['Agregat', 'SEA', 'Fish Consumption', 'Kebocoran Sampah Plastik', 'Top 10', 'Category Item', 'Keterangan']
+
+=== Sheet: Agregat ===
+      Country  ...  Total Plastic Consumption
+0  Bangladesh  ...                     579900
+1      Brunei  ...                      34600
+2    Cambodia  ...                      93700
+3       China  ...                   37600000
+4       India  ...                    7400000
+
+[5 rows x 5 columns]
+
+=== Sheet: SEA ===
+     Country  ...  Total Plastic Consumption
+0     Brunei  ...                      34600
+1   Cambodia  ...                      93700
+2  Indonesia  ...                    3400000
+3   Malaysia  ...                    1400000
+4  Singapore  ...                     593900
+
+[5 rows x 5 columns]
+
+=== Sheet: Fish Consumption ===
+   Year  Fish Consumption (kg/capita)
+0  2000                         21.57
+1  2001                         22.47
+2  2002                         22.79
+3  2003                         22.36
+4  2004                         22.58
+
+=== Sheet: Kebocoran Sampah Plastik ===
+  Kebocoran Sampah Plastik di Laut (ton)  ...            Unnamed: 3
+0                                  Tahun  ...  Total Sampah Plastik
+1                                   2018  ...             615674.63
+2                                   2019  ...             566074.94
+3                                   2020  ...             521540.67
+4                                   2021  ...              440106.7
+
+[5 rows x 4 columns]
+
+=== Sheet: Top 10 ===
+  Peringkat  ... Persentase per \nItem Collected
+0         1  ...                        0.004371
+1         2  ...                        0.069056
+2         3  ...                        0.354021
+3         4  ...                        0.030944
+4         5  ...                        0.163811
+
+[5 rows x 5 columns]
+
+=== Sheet: Category Item ===
+          Category  Jumlah (Unit  Persentase per \nCategory
+0  Cigarette butts            25                   0.004371
+1          Plastic          5617                   0.981993
+2             Foam            65                   0.011364
+3            Paper            13                   0.002273
+
+=== Sheet: Keterangan ===
+  The Impact of Plastic Consumption per Capita and Ocean Trash on Fish Production Across Several Asian Countries (2023)  ...                                         Unnamed: 7
+0                                                NaN                                                                     ...                                                NaN
+1                                            Country                                                                     ...                                                NaN
+2                                         Bangladesh                                                                     ...                    ICCAnnualReport2024_Digital.pdf
+3                                             Brunei                                                                     ...  Global Fisheries Production Volume Share by Co...
+4                                           Cambodia                                                                     ...                       World Population Review 2023
+
+[5 rows x 8 columns]
+

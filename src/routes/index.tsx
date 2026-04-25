@@ -4,7 +4,7 @@ import { PersonalStory } from "@/components/story/PersonalStory";
 import { ScaleChart } from "@/components/story/ScaleChart"; // Rank in Asia
 import { FlowMap } from "@/components/story/FlowMap"; // Fish Prod in SEA
 import { MorningRush } from "@/components/story/MorningRush"; // Surabaya Waste
-import { SurabayaMap } from "@/components/story/SurabayaMap"; // Hotspots Map
+import { LeakageTrend } from "@/components/story/LeakageTrend"; // Leakage Trend 2018-2022
 import { TransportModes } from "@/components/story/TransportModes"; // Debris Types
 import { Comparison } from "@/components/story/Comparison"; // Regression
 import { DurationChart } from "@/components/story/DurationChart"; // Projection
@@ -48,7 +48,7 @@ function Index() {
       <FlowMap />
       
       <MorningRush />
-      <SurabayaMap />
+      <LeakageTrend />
       
       <TransportModes />
       <Pullquote attribution="Divini, 2022">
