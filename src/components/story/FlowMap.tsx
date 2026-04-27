@@ -69,14 +69,14 @@ const MapLayer = memo(function MapLayer({ onMouseMove, onMouseLeave }: TooltipCb
 
             const baseFill = inSEA && data
               ? getChoroplethColor(data.plastic)
-              : "#0f354a"; // Background color untuk negara bukan SEA
+              : "#f1f5f9"; // Background color untuk negara bukan SEA (slate-100)
 
             return (
               <Geography
                 key={geo.rsmKey}
                 geography={geo}
                 fill={baseFill}
-                stroke="#2376a1"
+                stroke="#cbd5e1" // slate-300
                 strokeWidth={0.5}
                 style={{
                   default: {
@@ -87,7 +87,7 @@ const MapLayer = memo(function MapLayer({ onMouseMove, onMouseLeave }: TooltipCb
                     outline: "none",
                     fill: inSEA && data
                       ? "#ffe7b8" // Warna kuning/peach terang saat di-hover
-                      : "#0f354a",
+                      : "#f1f5f9",
                     cursor: inSEA ? "pointer" : "default",
                   },
                   pressed: { outline: "none" },

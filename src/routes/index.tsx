@@ -13,6 +13,7 @@ import { Calculator } from "@/components/story/Calculator"; // Footprint
 import { Closing } from "@/components/story/Closing";
 import { ProgressBar } from "@/components/story/ProgressBar";
 import { Pullquote } from "@/components/story/Pullquote";
+import { OceanDecorations } from "@/components/story/OceanDecorations";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -37,7 +38,8 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="relative min-h-screen bg-background text-foreground antialiased">
+    <main className="relative min-h-screen bg-transparent text-foreground antialiased">
+      <OceanDecorations />
       <ProgressBar />
       <Hero />
       <PersonalStory />

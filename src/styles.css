@@ -44,51 +44,52 @@
 :root {
   --radius: 0.5rem;
 
-  /* Infographic-inspired Ocean palette — medium teal, high contrast cards */
-  --background: #0b3347;         /* Slightly lighter / more teal */
-  --foreground: #ffffff;
-  --card: #1b5a78;               /* Noticeably lighter than bg — creates depth */
+  /* Deep Sea Blue Palette */
+  --background: #137b9d;         /* Base sea blue */
+  --foreground: #ffffff;         /* White text for contrast */
+  --card: rgba(255, 255, 255, 0.1);  /* Glassmorphism base */
   --card-foreground: #ffffff;
-  --popover: #1b5a78;
+  --popover: rgba(19, 123, 157, 0.95);
   --popover-foreground: #ffffff;
-  --primary: #17e6f3;
-  --primary-foreground: #0b3347;
-  --secondary: #1a5675;
+  --primary: #8be9fd;            /* Bright cyan for highlights */
+  --primary-foreground: #071f2e;
+  --secondary: rgba(255, 255, 255, 0.2);
   --secondary-foreground: #ffffff;
-  --muted: #1e6387;
-  --muted-foreground: #c4eaf7;   /* Brighter — better chart axis readability */
-  --accent: #0a6180;
+  --muted: rgba(255, 255, 255, 0.15);
+  --muted-foreground: rgba(255, 255, 255, 0.75); /* Soft white for secondary text */
+  --accent: rgba(255, 255, 255, 0.25);
   --accent-foreground: #ffffff;
-  --destructive: oklch(0.65 0.22 30);
-  --destructive-foreground: oklch(0.98 0.01 80);
-  --border: #2a82b0;             /* Crisper borders */
-  --input: #1e6387;
-  --ring: #17e6f3;
+  --destructive: #ff5555;        /* Coral red */
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.15); /* Subtle translucent borders */
+  --input: rgba(255, 255, 255, 0.15);
+  --ring: #8be9fd;
 
   /* Story palette */
-  --ink: #071f2e;
-  --ocean: #0b3347;
-  --water: #17e6f3;
-  --paper: #ffffff;
-  --coral: oklch(0.65 0.22 30);
+  --ink: #ffffff;
+  --ocean: #137b9d;
+  --water: #0a4f6e; /* Gelap sedikit agar kontras di grafik */
+  --paper: rgba(255, 255, 255, 0.1);
+  --coral: #ff5555;
 
-  /* Segments for charts */
-  --fish: #ade6e5;
-  --plastic: oklch(0.65 0.22 30);
-  --danger: oklch(0.55 0.25 30);
+  /* Segments for charts - High Contrast for Blue BG */
+  --fish: #fde047;       /* Bright Yellow */
+  --plastic: #f43f5e;    /* Bright Rose/Coral */
+  --danger: #fb923c;     /* Bright Orange */
 
-  --chart-1: #17e6f3;
-  --chart-2: var(--coral);
-  --chart-3: #0a6180;
-  --chart-4: #ade6e5;
-  --chart-5: var(--danger);
+  --chart-1: #fde047;    /* Yellow */
+  --chart-2: #f43f5e;    /* Rose */
+  --chart-3: #4ade80;    /* Light Green */
+  --chart-4: #ffffff;    /* White */
+  --chart-5: #fb923c;    /* Orange */
 }
 
 @layer base {
   * { border-color: var(--color-border); }
   html { scroll-behavior: smooth; }
   body {
-    background-color: var(--color-background);
+    background: linear-gradient(180deg, #137b9d 0%, #3db0d6 100%);
+    background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "ss01", "cv11";
@@ -114,17 +115,18 @@
     position: absolute;
     inset: 0;
     pointer-events: none;
-    opacity: 0.08;
-    mix-blend-mode: overlay;
+    opacity: 0.03;
+    mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.6'/></svg>");
   }
 
   .vignette {
-    background: radial-gradient(ellipse at center, transparent 40%, oklch(0.08 0.02 30 / 0.85) 100%);
+    /* Gentle dark blue vignette for underwater depth */
+    background: radial-gradient(ellipse at center, transparent 40%, rgba(10, 50, 70, 0.6) 100%);
   }
 
   .text-gradient-blood {
-    background: linear-gradient(135deg, oklch(0.65 0.22 30), oklch(0.55 0.25 30));
+    background: linear-gradient(135deg, var(--coral), var(--danger));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -172,14 +174,17 @@
     margin-bottom: 0.75rem;
   }
 
-  /* ── Data panel — chart area with elevated background ─────────────────────── */
+  /* ── Data panel — glassmorphism cards ───────────────────────────────────── */
   .data-panel {
     background: var(--color-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--color-border);
     border-radius: 0.75rem;
     padding: 1.5rem;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
   }
   .data-panel::before {
     content: "";
@@ -187,8 +192,8 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-water));
+    height: 4px;
+    background: var(--color-primary);
   }
 
   /* ── Big stat callout — large prominent number ─────────────────────────────── */
