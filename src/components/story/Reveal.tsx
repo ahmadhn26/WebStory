@@ -15,9 +15,12 @@ export function Reveal({
   children: ReactNode;
   delay?: number;
   className?: string;
-  as?: ElementType;
+  as?: string;
 }) {
-  const MotionTag = motion(as as ElementType) as ElementType;
+  // Gunakan komponen motion bawaan yang stabil (motion.div, motion.section, dll)
+  // JANGAN memanggil motion(as) di dalam render cycle karena akan membuat referensi komponen baru
+  // yang memaksa React melakukan unmount & remount terus-menerus (penyebab getar/animasi ulang).
+  const MotionTag = (motion as any)[as || "div"] || motion.div;
   return (
     <MotionTag
       className={className}

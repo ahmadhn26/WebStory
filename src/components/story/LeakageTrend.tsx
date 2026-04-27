@@ -18,9 +18,9 @@ export function LeakageTrend() {
           {/* Teks di kiri — sticky */}
           <Reveal>
             <div className="md:w-72 shrink-0 md:sticky md:top-28">
-              <div className="infographic-section-header">Babak 05 · Secercah Harapan</div>
+              <div className="infographic-section-header">Bagian 04 · Secercah Harapan</div>
               <h2 className="mt-2 font-display text-3xl leading-tight text-foreground md:text-4xl">
-                Gelombang yang mulai <span className="italic text-gradient-blood">mereda</span>.
+                Langkah kecil menuju laut yang <span className="italic text-gradient-blood"> bersih</span>.
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                 Meskipun masih didominasi plastik, ada tanda positif. Tren kebocoran sampah plastik ke laut di Indonesia menunjukkan <span className="text-foreground font-medium">penurunan stabil</span> sejak tahun 2018.
@@ -47,21 +47,21 @@ export function LeakageTrend() {
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--color-border)" />
-                  <XAxis 
-                    dataKey="year" 
-                    tick={{ fill: "var(--color-muted-foreground)", fontFamily: "var(--font-mono)", fontSize: 13 }} 
+                  <XAxis
+                    dataKey="year"
+                    tick={{ fill: "var(--color-muted-foreground)", fontFamily: "var(--font-mono)", fontSize: 13 }}
                     axisLine={{ stroke: "var(--color-border)" }}
                     tickLine={false}
                     tickMargin={12}
                   />
-                  <YAxis 
-                    tick={{ fill: "var(--color-muted-foreground)", fontFamily: "var(--font-mono)", fontSize: 13 }} 
-                    axisLine={false} 
+                  <YAxis
+                    tick={{ fill: "var(--color-muted-foreground)", fontFamily: "var(--font-mono)", fontSize: 13 }}
+                    axisLine={false}
                     tickLine={false}
                     tickFormatter={(v) => `${(v / 1000).toFixed(0)}K`}
                     width={55}
                   />
-                  <Tooltip 
+                  <Tooltip
                     cursor={{ stroke: "var(--color-muted)", strokeWidth: 1, strokeDasharray: "4 4" }}
                     contentStyle={{
                       background: "var(--color-card)",
@@ -75,13 +75,13 @@ export function LeakageTrend() {
                     formatter={(value: number) => [`${value.toLocaleString("id-ID")} Ton`, "Total Kebocoran"]}
                     labelFormatter={(label) => `Tahun ${label}`}
                   />
-                  <Area 
-                    type="monotone" 
-                    dataKey="amount" 
-                    stroke="var(--color-water)" 
+                  <Area
+                    type="monotone"
+                    dataKey="amount"
+                    stroke="var(--color-water)"
                     strokeWidth={3}
-                    fillOpacity={1} 
-                    fill="url(#colorLeakage)" 
+                    fillOpacity={1}
+                    fill="url(#colorLeakage)"
                     activeDot={{ r: 7, fill: "var(--color-water)", stroke: "var(--color-card)", strokeWidth: 2 }}
                   />
                 </AreaChart>

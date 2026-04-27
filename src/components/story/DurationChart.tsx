@@ -100,7 +100,7 @@ export function DurationChart() {
           {/* Teks kiri — sticky */}
           <Reveal>
             <div className="md:w-72 shrink-0 md:sticky md:top-28">
-              <div className="infographic-section-header">Babak 08 · Bahaya yang Mengintai</div>
+              <div className="infographic-section-header">Bagian 07 · Bahaya yang Mengintai</div>
               <h2 className="mt-2 font-display text-3xl leading-tight text-foreground md:text-4xl">
                 Proyeksi Konsumsi Ikan <span className="italic">Kita</span>.
               </h2>

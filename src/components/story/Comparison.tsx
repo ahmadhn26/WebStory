@@ -55,7 +55,7 @@ export function Comparison() {
         <Reveal>
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <div className="flex-1">
-              <div className="infographic-section-header">Babak 07 · Hubungan Berbahaya</div>
+              <div className="infographic-section-header">Bagian 06 · Hubungan Berbahaya</div>
               <h2 className="mt-2 max-w-3xl font-display text-4xl leading-tight text-foreground md:text-5xl">
                 Setiap <span className="italic text-gradient-blood">1 kg plastik</span> menghancurkan ekosistem laut kita.
               </h2>
@@ -70,41 +70,43 @@ export function Comparison() {
               </div>
             </div>
             
-            <div className="data-panel flex-1 w-full h-[500px]">
-              <ResponsiveContainer width="100%" height="100%">
-                <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
-                  <XAxis 
-                    type="number" 
-                    dataKey="plastic" 
-                    name="Plastic Consumption" 
-                    unit="kg"
-                    tick={{ fill: "var(--color-muted-foreground)", fontSize: 11 }}
-                    axisLine={{ stroke: "var(--color-border)" }}
-                  />
-                  <YAxis 
-                    type="number" 
-                    dataKey="lnFish" 
-                    name="LN(Fish Production)" 
-                    domain={['auto', 'auto']}
-                    tick={{ fill: "var(--color-muted-foreground)", fontSize: 11 }}
-                    axisLine={false}
-                    tickLine={false}
-                  />
-                  <ZAxis type="category" dataKey="country" name="Country" />
-                  <Tooltip content={<CustomTooltip />} cursor={{ strokeDasharray: '3 3' }} />
-                  <Scatter name="Countries" data={data}>
-                    {data.map((entry, index) => (
-                      <Cell 
-                        key={`cell-${index}`} 
-                        fill={entry.country === "Indonesia" ? "var(--color-coral)" : "var(--color-water)"} 
-                        opacity={entry.country === "Indonesia" ? 1 : 0.6}
-                      />
-                    ))}
-                  </Scatter>
-                </ScatterChart>
-              </ResponsiveContainer>
-              <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+            <div className="data-panel flex-1 w-full p-6 md:p-8 flex flex-col">
+              <div className="w-full h-[350px] sm:h-[400px]">
+                <ResponsiveContainer width="100%" height="100%">
+                  <ScatterChart margin={{ top: 10, right: 20, bottom: 0, left: -20 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+                    <XAxis 
+                      type="number" 
+                      dataKey="plastic" 
+                      name="Plastic Consumption" 
+                      unit="kg"
+                      tick={{ fill: "var(--color-muted-foreground)", fontSize: 11 }}
+                      axisLine={{ stroke: "var(--color-border)" }}
+                    />
+                    <YAxis 
+                      type="number" 
+                      dataKey="lnFish" 
+                      name="LN(Fish Production)" 
+                      domain={['auto', 'auto']}
+                      tick={{ fill: "var(--color-muted-foreground)", fontSize: 11 }}
+                      axisLine={false}
+                      tickLine={false}
+                    />
+                    <ZAxis type="category" dataKey="country" name="Country" />
+                    <Tooltip content={<CustomTooltip />} cursor={{ strokeDasharray: '3 3' }} />
+                    <Scatter name="Countries" data={data}>
+                      {data.map((entry, index) => (
+                        <Cell 
+                          key={`cell-${index}`} 
+                          fill={entry.country === "Indonesia" ? "var(--color-coral)" : "var(--color-water)"} 
+                          opacity={entry.country === "Indonesia" ? 1 : 0.6}
+                        />
+                      ))}
+                    </Scatter>
+                  </ScatterChart>
+                </ResponsiveContainer>
+              </div>
+              <p className="mt-6 text-center font-mono text-[9px] sm:text-[10px] uppercase tracking-widest text-muted-foreground">
                 LN(Produksi Ikan) vs Konsumsi Plastik Per Kapita (kg) · 20 Negara (2023)
               </p>
             </div>

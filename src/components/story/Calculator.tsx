@@ -40,7 +40,7 @@ export function Calculator() {
     <section className="relative overflow-hidden bg-gradient-to-b from-background via-card/40 to-background py-32 md:py-48">
       <div className="mx-auto max-w-5xl px-6">
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-danger">Babak 10 · Kalkulasi Pribadi</p>
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-danger">Bagian 10 · Kalkulasi Pribadi</p>
           <h2 className="mt-4 max-w-3xl font-display text-4xl leading-tight text-foreground md:text-6xl">
             Mari kita hitung <span className="italic">warisan plastik Anda</span>.
           </h2>

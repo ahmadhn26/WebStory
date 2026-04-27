@@ -1,34 +1,34 @@
-import { useState, useCallback, memo } from "react";
+import { useState, useCallback, memo, useRef } from "react";
 import {
   ComposableMap,
   Geographies,
   Geography,
 } from "react-simple-maps";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue } from "framer-motion";
 import { Reveal } from "./Reveal";
 
 const GEO_URL =
   "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json";
 
-// Data Konsumsi Plastik Nasional — Negara Asia Tenggara (Ton) 2023
-const SEA_DATA: Record<string, { plastic: number; iso: string }> = {
-  Indonesia:   { plastic: 3_400_000, iso: "360" },
-  Thailand:    { plastic: 3_400_000, iso: "764" },
-  Vietnam:     { plastic: 3_000_000, iso: "704" },
-  Malaysia:    { plastic: 1_400_000, iso: "458" },
-  Philippines: { plastic:   938_200, iso: "608" },
-  Singapore:   { plastic:   593_900, iso: "702" },
-  Myanmar:     { plastic:   498_400, iso: "104" },
-  Cambodia:    { plastic:    93_700, iso: "116" },
-  Brunei:      { plastic:    34_600, iso: "096" },
-  Laos:        { plastic:    21_500, iso: "418" },
+// Data Produksi Ikan Nasional — Negara Asia Tenggara (Ton)
+const SEA_DATA: Record<string, { fish: number; iso: string }> = {
+  Indonesia:   { fish: 21_800_000, iso: "360" },
+  Vietnam:     { fish:  8_786_589, iso: "704" },
+  Philippines: { fish:  4_014_862, iso: "608" },
+  Thailand:    { fish:  2_308_267, iso: "764" },
+  Myanmar:     { fish:  2_215_443, iso: "104" },
+  Malaysia:    { fish:  1_787_174, iso: "458" },
+  Cambodia:    { fish:    892_752, iso: "116" },
+  Laos:        { fish:    213_150, iso: "418" },
+  Brunei:      { fish:     22_370, iso: "096" },
+  Singapore:   { fish:      7_096, iso: "702" },
 };
 
 const ISO_TO_NAME: Record<string, string> = Object.fromEntries(
   Object.entries(SEA_DATA).map(([name, d]) => [d.iso, name])
 );
 const SEA_ISO_SET = new Set(Object.values(SEA_DATA).map((d) => d.iso));
-const MAX_PLASTIC = Math.max(...Object.values(SEA_DATA).map((d) => d.plastic));
+const MAX_FISH = Math.max(...Object.values(SEA_DATA).map((d) => d.fish));
 
 function formatTon(n: number): string {
   if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(2)} Juta Ton`;
@@ -36,8 +36,8 @@ function formatTon(n: number): string {
   return `${n} Ton`;
 }
 
-function getChoroplethColor(plastic: number): string {
-  const t = plastic / MAX_PLASTIC;
+function getChoroplethColor(fish: number): string {
+  const t = fish / MAX_FISH;
   if (t > 0.85) return "#d74f3e"; // Sangat Tinggi (Merah bata / Coral tua)
   if (t > 0.65) return "#ee734a"; // Tinggi
   if (t > 0.40) return "#fa9560"; // Sedang
@@ -47,7 +47,7 @@ function getChoroplethColor(plastic: number): string {
 }
 
 interface TooltipCb {
-  onMouseMove: (name: string, plastic: number, e: React.MouseEvent<SVGPathElement>) => void;
+  onMouseMove: (name: string, fish: number, e: React.MouseEvent<SVGPathElement>) => void;
   onMouseLeave: () => void;
 }
 
@@ -68,7 +68,7 @@ const MapLayer = memo(function MapLayer({ onMouseMove, onMouseLeave }: TooltipCb
             const data   = name ? SEA_DATA[name] : undefined;
 
             const baseFill = inSEA && data
-              ? getChoroplethColor(data.plastic)
+              ? getChoroplethColor(data.fish)
               : "#f1f5f9"; // Background color untuk negara bukan SEA (slate-100)
 
             return (
@@ -79,22 +79,16 @@ const MapLayer = memo(function MapLayer({ onMouseMove, onMouseLeave }: TooltipCb
                 stroke="#cbd5e1" // slate-300
                 strokeWidth={0.5}
                 style={{
-                  default: {
-                    outline: "none",
-                    transition: "fill 0.25s ease",
-                  },
-                  hover: {
-                    outline: "none",
-                    fill: inSEA && data
-                      ? "#ffe7b8" // Warna kuning/peach terang saat di-hover
-                      : "#f1f5f9",
-                    cursor: inSEA ? "pointer" : "default",
+                  default: { outline: "none" },
+                  hover: { 
+                    outline: "none", 
+                    cursor: inSEA ? "pointer" : "default" 
                   },
                   pressed: { outline: "none" },
                 }}
                 onMouseMove={
                   inSEA && name && data
-                    ? (e: React.MouseEvent<SVGPathElement>) => onMouseMove(name, data.plastic, e)
+                    ? (e: React.MouseEvent<SVGPathElement>) => onMouseMove(name, data.fish, e)
                     : undefined
                 }
                 onMouseLeave={inSEA ? onMouseLeave : undefined}
@@ -108,39 +102,56 @@ const MapLayer = memo(function MapLayer({ onMouseMove, onMouseLeave }: TooltipCb
 });
 // ─────────────────────────────────────────────────────────────────────────────
 
-interface Tooltip { name: string; plastic: number; x: number; y: number }
+interface Tooltip { name: string; fish: number }
 
 export function FlowMap() {
   const [tooltip, setTooltip] = useState<Tooltip | null>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Stable callbacks — tidak berubah antar render → MapLayer tidak re-render
   const handleMouseMove = useCallback(
-    (name: string, plastic: number, e: React.MouseEvent<SVGPathElement>) => {
+    (name: string, fish: number, e: React.MouseEvent<SVGPathElement>) => {
+      // Batalkan penghapusan tooltip jika masuk/gerak di negara valid
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+      
       const svg  = e.currentTarget.closest("svg");
       if (!svg) return;
       const rect = svg.getBoundingClientRect();
-      setTooltip({ name, plastic, x: e.clientX - rect.left, y: e.clientY - rect.top });
+      
+      // Update motion values directly without causing re-renders (60fps mulus)
+      mouseX.set(e.clientX - rect.left);
+      mouseY.set(e.clientY - rect.top);
+      
+      // Gunakan prev state check agar tidak merender ulang jika negaranya masih sama
+      // Ini juga me-recover tooltip secara instan jika sempat hilang karena onMouseLeave negara sebelumnya
+      setTooltip(prev => (prev?.name === name ? prev : { name, fish }));
     },
-    []
+    [mouseX, mouseY]
   );
 
-  const handleMouseLeave = useCallback(() => setTooltip(null), []);
+  const handleMouseLeave = useCallback(() => {
+    timeoutRef.current = setTimeout(() => {
+      setTooltip(null);
+    }, 50); // 50ms delay to prevent flickering between borders
+  }, []);
 
-  const ranked = Object.entries(SEA_DATA).sort((a, b) => b[1].plastic - a[1].plastic);
+  const ranked = Object.entries(SEA_DATA).sort((a, b) => b[1].fish - a[1].fish);
 
   return (
     <section className="bg-background py-20">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
-            Babak 03 · Peta Konsumsi Plastik
+            Bagian 03 · Potensi Sumber Daya Laut
           </p>
           <h2 className="mt-4 max-w-3xl font-display text-4xl leading-tight text-foreground md:text-6xl">
-            Plastik di <span className="italic">Asia Tenggara</span>.
+            Produksi Ikan di <span className="italic text-primary">Asia Tenggara</span>.
           </h2>
           <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Di seluruh kawasan, plastik mengalir deras setiap hari. Indonesia dan Thailand memimpin
-            di angka <span className="text-foreground font-medium">3,4 juta ton</span>, diikuti Vietnam dan Malaysia.
+            Sebagai negara kepulauan, Indonesia memiliki peran vital dalam penyediaan pangan laut di kawasan ini. Dengan total produksi mencapai <span className="text-foreground font-medium">21,8 juta ton</span>, Indonesia memimpin sebagai produsen ikan terbesar di ASEAN.
           </p>
         </Reveal>
 
@@ -159,19 +170,20 @@ export function FlowMap() {
                   transition={{ duration: 0.12 }}
                   className="pointer-events-none absolute z-20 rounded-lg border border-border bg-card px-4 py-3 shadow-xl"
                   style={{
-                    left: tooltip.x,
-                    top: tooltip.y - 80,
-                    transform: "translateX(-50%)",
+                    left: mouseX,
+                    top: mouseY,
+                    x: "-50%",
+                    y: "-120%" // geser ke atas kursor sedikit
                   }}
                 >
                   <p className="font-mono text-[10px] uppercase tracking-widest text-primary mb-1">
                     {tooltip.name}
                   </p>
                   <p className="font-display text-xl text-foreground leading-tight">
-                    {formatTon(tooltip.plastic)}
+                    {formatTon(tooltip.fish)}
                   </p>
                   <p className="font-mono text-[9px] text-muted-foreground mt-1 uppercase tracking-wider">
-                    Konsumsi Plastik Nasional
+                    Total Produksi Ikan
                   </p>
                 </motion.div>
               )}
@@ -190,14 +202,14 @@ export function FlowMap() {
               >
                 <span
                   className="h-3 w-3 shrink-0 rounded-sm"
-                  style={{ background: getChoroplethColor(d.plastic) }}
+                  style={{ background: getChoroplethColor(d.fish) }}
                 />
                 <div className="min-w-0">
                   <p className="font-mono text-[10px] uppercase tracking-wide text-muted-foreground truncate">
                     #{i + 1} {name}
                   </p>
                   <p className="font-mono text-[10px] text-foreground">
-                    {formatTon(d.plastic)}
+                    {formatTon(d.fish)}
                   </p>
                 </div>
               </div>
@@ -205,7 +217,7 @@ export function FlowMap() {
           </div>
 
           <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-            Konsumsi Plastik Nasional (Ton) · Data Primer Penelitian · Asia Tenggara
+            Total Produksi Ikan (Ton) · Data Primer Penelitian · Asia Tenggara
             · Hover negara untuk detail
           </p>
         </Reveal>

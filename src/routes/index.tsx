@@ -3,12 +3,13 @@ import { Hero } from "@/components/story/Hero";
 import { PersonalStory } from "@/components/story/PersonalStory";
 import { ScaleChart } from "@/components/story/ScaleChart"; // Rank in Asia
 import { FlowMap } from "@/components/story/FlowMap"; // Fish Prod in SEA
-import { MorningRush } from "@/components/story/MorningRush"; // Surabaya Waste
+
 import { LeakageTrend } from "@/components/story/LeakageTrend"; // Leakage Trend 2018-2022
 import { TransportModes } from "@/components/story/TransportModes"; // Debris Types
 import { Comparison } from "@/components/story/Comparison"; // Regression
 import { DurationChart } from "@/components/story/DurationChart"; // Projection
 import { HealthImpact } from "@/components/story/LifeClock"; // Health Cycle
+import { DiseaseImpact } from "@/components/story/DiseaseImpact"; // Disease consequences
 import { Calculator } from "@/components/story/Calculator"; // Footprint
 import { Closing } from "@/components/story/Closing";
 import { ProgressBar } from "@/components/story/ProgressBar";
@@ -49,7 +50,7 @@ function Index() {
       <ScaleChart />
       <FlowMap />
       
-      <MorningRush />
+
       <LeakageTrend />
       
       <TransportModes />
@@ -60,6 +61,7 @@ function Index() {
       <DurationChart />
       
       <HealthImpact />
+      <DiseaseImpact />
       
       <Calculator />
       <Closing />

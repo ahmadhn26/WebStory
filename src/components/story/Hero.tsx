@@ -35,7 +35,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.3 }}
           className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
         >
-          Sebuah Krisis Tersembunyi · Indonesia 2024
+          Visualisasi Data dan Informasi · Kelompok 2 3SD2
         </motion.p>
 
         <motion.h1
@@ -44,9 +44,9 @@ export function Hero() {
           transition={{ duration: 1.2, delay: 0.6 }}
           className="mt-8 max-w-5xl font-display text-5xl font-light leading-[1.05] text-balance text-foreground sm:text-7xl md:text-[5.5rem]"
         >
-          Apakah lautan kita masih hidup…
+          IKAN RASA PLASTIK?
           <br />
-          <span className="italic text-gradient-blood">atau tenggelam dalam lautan plastik?</span>
+          <span className="italic text-gradient-blood">Save Our Marine Life</span>
         </motion.h1>
 
         <motion.p
@@ -55,7 +55,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 1.1 }}
           className="mt-8 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
-          Hanya pada tahun 2022, Indonesia melepaskan sekitar <span className="font-medium text-foreground">398.000 ton</span> plastik ke laut—setara dengan berat <span className="font-medium text-foreground">57.000 gajah Afrika</span>. Laut perlahan menjadi ruang senyap bagi kehidupan, dan tempat pembuangan abadi bagi keserakahan kita.
+          Pada tahun 2025, diperkirakan  <span className="font-medium text-foreground">16,02 juta ton</span> sampah masuk ke perairan Indonesia. Bila dibandingkan, angka tersebut setara dengan berat <span className="font-medium text-foreground">4,5 juta ekor gajah Afrika Jantan.</span>
         </motion.p>
 
         <motion.div
@@ -64,9 +64,6 @@ export function Hero() {
           transition={{ delay: 1.8, duration: 1 }}
           className="absolute bottom-10 flex flex-col items-center gap-2"
         >
-          <span className="font-mono text-[10px] uppercase tracking-[0.4em] text-muted-foreground">
-            Gulir
-          </span>
           <ChevronDown className="h-5 w-5 animate-bounce text-muted-foreground" />
         </motion.div>
       </motion.div>

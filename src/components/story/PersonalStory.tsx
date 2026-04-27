@@ -3,10 +3,10 @@ import fishImg from "@/assets/contaminated-fish.png";
 import { Reveal } from "./Reveal";
 
 const timeline = [
-  { time: "Dibuang", label: "Akhir yang Semu", note: "Plastik berakhir di darat, lalu hanyut ke laut lepas.", icon: "♺" },
-  { time: "Mengurai", label: "Mengecil, Bukan Hilang", note: "Hantaman ombak dan UV memecahnya menjadi mikroplastik tak kasat mata.", icon: "▤" },
-  { time: "Diperangkap", label: "Jebakan Tersembunyi", note: "Ikan menelan mikroplastik beracun yang menyerupai plankton.", icon: "◐" },
-  { time: "Tersaji", label: "Kembali kepada Kita", note: "Racun tersebut akhirnya mengendap dalam tubuh kita sendiri.", icon: "↺" },
+  { time: "01", label: "Plastik Terbawa ke Laut", note: "Sampah plastik yang tidak terkelola di darat terbawa oleh aliran air hingga berakhir di laut lepas.", icon: "♺" },
+  { time: "02", label: "Pecah Menjadi Mikroplastik", note: "Akibat paparan sinar matahari dan hantaman ombak, plastik pecah menjadi partikel kecil yang disebut mikroplastik.", icon: "▤" },
+  { time: "03", label: "Tertelan oleh Ikan", note: "Ikan sering kali salah mengira butiran plastik tersebut sebagai makanan, sehingga partikel tersebut masuk ke dalam tubuh mereka.", icon: "◐" },
+  { time: "04", label: "Dampak pada Kesehatan", note: "Saat kita mengonsumsi ikan tersebut, partikel plastik dan zat beracun di dalamnya ikut masuk ke dalam tubuh kita.", icon: "↺" },
 ];
 
 export function PersonalStory() {
@@ -15,9 +15,9 @@ export function PersonalStory() {
       <div className="mx-auto grid max-w-7xl gap-16 px-6 md:grid-cols-2 md:gap-24">
         <Reveal>
           <div className="sticky top-24">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">Babak 01 · Korban Tak Bersuara</p>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">Bagian 01 · Dampak Terhadap Ekosistem Laut</p>
             <h2 className="mt-4 font-display text-4xl leading-tight text-foreground md:text-6xl">
-              Kita tidak bisa lari dari <span className="italic">apa yang kita buang</span>.
+              Sampah yang Kita Buang Akhirnya <span className="italic text-primary">Kembali ke Kita</span>.
             </h2>
             <p className="mt-6 max-w-md text-base leading-relaxed text-muted-foreground md:text-lg">
               Berdasarkan penelitian (Apriliani, 2024), <span className="text-foreground font-medium">80% ikan konsumsi di Indonesia</span> telah terkontaminasi mikroplastik.
