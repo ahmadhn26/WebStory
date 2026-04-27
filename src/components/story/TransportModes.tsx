@@ -10,6 +10,19 @@ const data = [
   { name: "Paper", value: 0.23, amount: 13 },
 ];
 
+const top10Items = [
+  { rank: 1, name: "Food wrappers (candy, chips, etc.)", category: "Plastic", amount: 2025, percent: 35.40 },
+  { rank: 2, name: "Other bags (plastic)", category: "Plastic", amount: 1583, percent: 27.67 },
+  { rank: 3, name: "Grocery bags (plastic)", category: "Plastic", amount: 937, percent: 16.38 },
+  { rank: 4, name: "Beverage bottles (plastic)", category: "Plastic", amount: 395, percent: 6.91 },
+  { rank: 5, name: "Straws/stirrers (plastic)", category: "Plastic", amount: 318, percent: 5.56 },
+  { rank: 6, name: "Food containers (plastic)", category: "Plastic", amount: 182, percent: 3.18 },
+  { rank: 7, name: "Bottle caps (plastic)", category: "Plastic", amount: 177, percent: 3.09 },
+  { rank: 8, name: "Food containers (foam)", category: "Foam", amount: 65, percent: 1.14 },
+  { rank: 9, name: "Cigarette butts", category: "Cigarette", amount: 25, percent: 0.44 },
+  { rank: 10, name: "Cups, Plates (paper)", category: "Paper", amount: 13, percent: 0.23 },
+];
+
 const COLORS = [
   "var(--color-coral)", 
   "var(--color-water)", 
@@ -21,7 +34,7 @@ const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     const data = payload[0].payload;
     return (
-      <div className="rounded-lg border border-border bg-card p-3 shadow-xl font-mono text-xs text-foreground">
+      <div className="rounded-lg border border-border bg-card p-3 shadow-xl font-mono text-xs text-foreground backdrop-blur-md">
         <p className="font-bold text-primary mb-1 uppercase tracking-widest">{data.name}</p>
         <p className="text-muted-foreground">Persentase: <span className="text-foreground">{data.value}%</span></p>
         <p className="text-muted-foreground mt-1">Ditemukan: <span className="text-foreground">{data.amount} Unit</span></p>
@@ -33,7 +46,7 @@ const CustomTooltip = ({ active, payload }: any) => {
 
 export function TransportModes() {
   return (
-    <section className="border-b border-border bg-gradient-to-b from-card/20 to-background py-32 text-foreground">
+    <section className="border-b border-border bg-gradient-to-b from-card/20 to-transparent py-32 text-foreground">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <div className="flex flex-col md:flex-row gap-12 items-center">
@@ -52,7 +65,7 @@ export function TransportModes() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="rounded-lg border border-border bg-card/40 p-6 backdrop-blur max-w-sm"
+                className="data-panel max-w-sm"
               >
                 <p className="font-mono text-xs uppercase tracking-widest text-muted-foreground mb-4">
                   Klaim Monopoli:
@@ -99,9 +112,72 @@ export function TransportModes() {
                 </BarChart>
               </ResponsiveContainer>
               <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
-                Persentase Kategori Sampah yang Ditemukan (2023)
+                Persentase Kategori Sampah (2023)
               </p>
             </div>
+          </div>
+        </Reveal>
+
+        {/* Top 10 Items List - Standard Bar Chart */}
+        <Reveal delay={0.4}>
+          <div className="mt-24 data-panel p-6 md:p-10">
+            <h3 className="font-display text-2xl mb-2">10 Benda Paling Banyak Ditemukan</h3>
+            <p className="text-muted-foreground mb-8">
+              Bungkus makanan dan kantong plastik mendominasi laporan penemuan puing-puing lautan. Dari total 5.720 item yang dikumpulkan, ini adalah urutan teratasnya:
+            </p>
+
+            <div className="w-full h-[500px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={top10Items} layout="vertical" margin={{ top: 0, right: 30, left: 130, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="var(--color-border)" />
+                  <XAxis 
+                    type="number" 
+                    tick={{ fill: "var(--color-muted-foreground)", fontFamily: "var(--font-mono)", fontSize: 11 }} 
+                    axisLine={{ stroke: "var(--color-border)" }}
+                    tickLine={false}
+                  />
+                  <YAxis 
+                    type="category" 
+                    dataKey="name" 
+                    tick={{ fill: "var(--color-foreground)", fontFamily: "var(--font-sans)", fontSize: 11 }} 
+                    axisLine={false} 
+                    tickLine={false}
+                    width={120}
+                  />
+                  <Tooltip 
+                    cursor={{ fill: "var(--color-card)", opacity: 0.5 }}
+                    content={({ active, payload }) => {
+                      if (active && payload && payload.length) {
+                        const data = payload[0].payload;
+                        return (
+                          <div className="rounded-lg border border-border bg-card p-3 shadow-xl font-mono text-xs text-foreground backdrop-blur-md">
+                            <p className="font-bold text-primary mb-1">{data.name}</p>
+                            <p className="text-muted-foreground">Kategori: <span className="text-foreground uppercase">{data.category}</span></p>
+                            <p className="text-muted-foreground mt-1">Jumlah: <span className="text-foreground">{data.amount} Unit</span></p>
+                            <p className="text-muted-foreground">Porsi: <span className="text-foreground">{data.percent}%</span></p>
+                          </div>
+                        );
+                      }
+                      return null;
+                    }}
+                  />
+                  <Bar dataKey="amount" radius={[0, 4, 4, 0]} barSize={24}>
+                    {top10Items.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.category === 'Plastic' ? 'var(--color-coral)' : 'var(--color-muted-foreground)'} />
+                    ))}
+                    <LabelList 
+                      dataKey="amount" 
+                      position="right" 
+                      style={{ fill: "var(--color-foreground)", fontFamily: "var(--font-mono)", fontSize: "11px" }}
+                    />
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+            
+            <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
+              Total Penemuan Item: 5,720 Unit · Berdasarkan data pengumpulan 2023
+            </p>
           </div>
         </Reveal>
       </div>
