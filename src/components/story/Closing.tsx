@@ -38,16 +38,16 @@ export function Closing() {
           transition={{ duration: 1.4, delay: 0.3 }}
           className="mt-10 font-display text-3xl font-light leading-[1.15] text-foreground text-balance sm:text-5xl md:text-6xl"
         >
-          Kita belum terlambat. <br />
-          <span className="italic text-gradient-blood">Lindungi lautan, lindungi diri Anda sendiri.</span>
+          Pilihan Kita Hari Ini <br />
+          <span className="italic text-gradient-blood">Menentukan Masa Depan</span>
         </motion.h2>
 
         <motion.div
-           initial={{ opacity: 0, y: 30 }}
-           whileInView={{ opacity: 1, y: 0 }}
-           viewport={{ once: true }}
-           transition={{ duration: 1, delay: 0.8 }}
-           className="mt-16 flex flex-col items-center gap-6 text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="mt-16 flex flex-col items-center gap-6 text-center"
         >
           <p className="font-mono text-xs tracking-[0.2em] text-primary uppercase opacity-80">Langkah Rekomendasi</p>
           <ul className="space-y-4 font-sans text-sm md:text-base text-muted-foreground/80 max-w-md">
@@ -72,9 +72,9 @@ export function Closing() {
           transition={{ duration: 1.2, delay: 1.4 }}
           className="mt-16 max-w-2xl font-display text-2xl italic leading-relaxed text-muted-foreground sm:text-3xl"
         >
-          Keputusan keliru hari ini akan ditanggung oleh laut. <br />
-          Dan apa yang ditanggung laut, <br className="md:hidden" />
-          <span className="text-danger italic font-medium">akan meracuni piring anak cucu kita</span>.
+          Menjaga kelestarian laut berarti memastikan ketersediaan <br className="hidden md:block" />
+          sumber pangan yang sehat bagi <br className="md:hidden" />
+          <span className="text-primary italic font-medium">generasi mendatang</span>.
         </motion.p>
 
         <motion.p

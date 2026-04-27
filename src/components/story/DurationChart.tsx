@@ -100,12 +100,12 @@ export function DurationChart() {
           {/* Teks kiri — sticky */}
           <Reveal>
             <div className="md:w-72 shrink-0 md:sticky md:top-28">
-              <div className="infographic-section-header">Bagian 07 · Bahaya yang Mengintai</div>
+              <div className="infographic-section-header">BAGIAN 07 • ANALISIS PROYEKSI KONSUMSI</div>
               <h2 className="mt-2 font-display text-3xl leading-tight text-foreground md:text-4xl">
-                Proyeksi Konsumsi Ikan <span className="italic">Kita</span>.
+                Prediksi Konsumsi Ikan di Indonesia
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                Garis biru adalah realita, garis merah adalah peringatan. Proyeksi Holt Double Exponential Smoothing (2025–2027) menunjukkan laju yang tak terbendung.
+                Garis biru menunjukkan data historis, sementara garis oranye merupakan hasil estimasi. Proyeksi menggunakan metode Holt Double Exponential Smoothing (2025–2027) memperkirakan adanya tren peningkatan yang berkelanjutan.
               </p>
               <div className="mt-8 data-panel">
                 <div className="stat-callout">

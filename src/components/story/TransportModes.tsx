@@ -26,9 +26,9 @@ const top10Bubbles = [
 ];
 
 const COLORS = [
-  "var(--color-coral)", 
-  "var(--color-water)", 
-  "var(--color-muted-foreground)", 
+  "var(--color-coral)",
+  "var(--color-water)",
+  "var(--color-muted-foreground)",
   "var(--color-border)"
 ];
 
@@ -60,7 +60,7 @@ export function TransportModes() {
       .padding(4); // Jarak/padding antar gelembung
 
     const nodes = packLayout(root).leaves();
-    
+
     // Kembalikan data gabungan
     return nodes.map(node => ({
       ...node.data,
@@ -76,16 +76,16 @@ export function TransportModes() {
         <Reveal>
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <div className="flex-1 space-y-6">
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">Bagian 05 · Jenis Puing Laut</p>
+              <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">Bagian 05 ·  KOMPOSISI SAMPAH LAUT</p>
               <h2 className="font-display text-4xl leading-tight text-foreground md:text-5xl">
-                Lautan kita menelan <br />
-                <span className="italic text-gradient-blood">apa saja?</span>
+                Apa saja jenis sampah <br />
+                <span className="italic text-gradient-blood">di laut kita?</span>
               </h2>
               <p className="max-w-xl text-base leading-relaxed text-muted-foreground md:text-lg">
-                Ada berbagai jenis sampah di perairan kita, namun <span className="text-foreground font-medium">plastik adalah dominator mutlak</span>.
+                Ada berbagai jenis sampah di perairan Indonesia, <span className="text-foreground font-medium"> namun sampah plastik adalah yang paling mendominasi.</span>.
               </p>
-              
-              <motion.div 
+
+              <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -99,7 +99,7 @@ export function TransportModes() {
                   <span className="font-display text-5xl md:text-6xl text-coral">98.2<span className="text-3xl text-muted-foreground">%</span></span>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  Dari seluruh sampel sampah yang diuji, plastik mendominasi mutlak secara abadi, menolak mati dan mengancam menjadi mikroplastik mematikan.
+                  Dari seluruh sampel yang diuji, plastik merupakan jenis sampah yang paling banyak ditemukan. Sampah plastik sulit terurai dan berisiko pecah menjadi mikroplastik yang berbahaya.
                 </p>
               </motion.div>
             </div>
@@ -109,16 +109,16 @@ export function TransportModes() {
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={data} margin={{ top: 30, right: 0, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="var(--color-border)" />
-                  <XAxis 
-                    dataKey="name" 
-                    tick={{ fill: "var(--color-muted-foreground)", fontFamily: "var(--font-mono)", fontSize: 11 }} 
+                  <XAxis
+                    dataKey="name"
+                    tick={{ fill: "var(--color-muted-foreground)", fontFamily: "var(--font-mono)", fontSize: 11 }}
                     axisLine={{ stroke: "var(--color-border)" }}
                     tickLine={false}
                     tickMargin={12}
                   />
-                  <YAxis 
-                    tick={{ fill: "var(--color-muted-foreground)", fontFamily: "var(--font-mono)", fontSize: 11 }} 
-                    axisLine={false} 
+                  <YAxis
+                    tick={{ fill: "var(--color-muted-foreground)", fontFamily: "var(--font-mono)", fontSize: 11 }}
+                    axisLine={false}
                     tickLine={false}
                     tickFormatter={(val) => `${val}%`}
                   />
@@ -127,9 +127,9 @@ export function TransportModes() {
                     {data.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                     ))}
-                    <LabelList 
-                      dataKey="value" 
-                      position="top" 
+                    <LabelList
+                      dataKey="value"
+                      position="top"
                       formatter={(val: number) => `${val}%`}
                       style={{ fill: "var(--color-foreground)", fontFamily: "var(--font-mono)", fontSize: "10px" }}
                     />
@@ -170,26 +170,25 @@ export function TransportModes() {
                     initial={{ scale: 0, opacity: 0 }}
                     whileInView={{ scale: 1, opacity: 1 }}
                     viewport={{ once: true }}
-                    className={`w-full h-full rounded-full shadow-xl transition-all duration-300 flex flex-col items-center justify-center border-4 sm:border-8 ${bubble.color} ${bubble.border} ${
-                      hoveredBubble && hoveredBubble !== bubble.rank ? 'opacity-40 grayscale-[50%]' : 'opacity-100'
-                    }`}
+                    className={`w-full h-full rounded-full shadow-xl transition-all duration-300 flex flex-col items-center justify-center border-4 sm:border-8 ${bubble.color} ${bubble.border} ${hoveredBubble && hoveredBubble !== bubble.rank ? 'opacity-40 grayscale-[50%]' : 'opacity-100'
+                      }`}
                     animate={
                       hoveredBubble === bubble.rank ? { y: 0, scale: 1.05 } : { y: [0, -10, 0] }
                     }
                     // @ts-ignore - framer motion types
                     transition={
-                      hoveredBubble === bubble.rank 
+                      hoveredBubble === bubble.rank
                         ? { type: "spring", stiffness: 300, damping: 20 }
                         : {
-                            y: {
-                              duration: 4 + (bubble.rank % 3),
-                              repeat: Infinity,
-                              ease: "easeInOut",
-                              delay: bubble.floatDelay
-                            },
-                            scale: { type: "spring", stiffness: 100, damping: 15, delay: bubble.rank * 0.1 },
-                            opacity: { delay: bubble.rank * 0.1 }
-                          }
+                          y: {
+                            duration: 4 + (bubble.rank % 3),
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                            delay: bubble.floatDelay
+                          },
+                          scale: { type: "spring", stiffness: 100, damping: 15, delay: bubble.rank * 0.1 },
+                          opacity: { delay: bubble.rank * 0.1 }
+                        }
                     }
                   >
                     {/* Tulisan Melingkar di Atas (Simulasi) */}
@@ -219,7 +218,7 @@ export function TransportModes() {
                 </div>
               ))}
             </div>
-            
+
             <p className="mt-6 text-center font-mono text-[10px] uppercase tracking-widest text-muted-foreground">
               Total Penemuan Item: 5,720 Unit · Berdasarkan data pengumpulan 2023
             </p>

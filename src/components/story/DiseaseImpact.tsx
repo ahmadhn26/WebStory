@@ -6,20 +6,20 @@ import imgImmune from "@/assets/47.png";
 
 const diseases = [
   {
-    title: "Allergic Inflammation",
-    desc: "Partikel mikroplastik yang menembus aliran darah akan dianggap sebagai benda asing. Tubuh merespons fragmen mikroskopis ini layaknya patogen mematikan, memicu peradangan sistemik dan reaksi alergi kronis yang merusak jaringan.",
+    title: "Inflammation",
+    desc: "Mikroplastik yang masuk ke aliran darah dikenali tubuh sebagai benda asing, memicu respon imun sistemik. Hal ini menyebabkan pelepasan agen inflamasi (sitokin) yang jika terjadi terus-menerus dapat memicu peradangan kronis pada jaringan.",
     img: imgAllergy,
     delay: 0.1
   },
   {
-    title: "Kanker (Cancer)",
-    desc: "Mikroplastik bertindak layaknya spons beracun yang menyerap polutan laut. Saat mengendap di organ vital, akumulasi zat karsinogenik dan logam berat ini secara langsung meningkatkan mutasi seluler yang memicu pertumbuhan sel kanker.",
+    title: "Cancer",
+    desc: "Mikroplastik dapat menyerap polutan berbahaya dari lingkungan dan bertindak sebagai pembawa (vector) zat beracun ke dalam organ vital. Paparan jangka panjang dapat memicu stres oksidatif dan kerusakan DNA, yang meningkatkan risiko terjadinya mutasi seluler dan pembentukan kanker.",
     img: imgCancer,
     delay: 0.3
   },
   {
-    title: "Immune Disorder",
-    desc: "Paparan material sintetis yang terus-menerus membuat sistem kekebalan tubuh menjadi kebingungan. Hal ini memicu disfungsi di mana sistem imun akhirnya berbalik menyerang sel-sel sehat, menyebabkan berbagai gangguan autoimun.",
+    title: "Immune Disorders",
+    desc: "Paparan material sintetis secara terus-menerus dapat mengganggu fungsi sistem pertahanan tubuh kita. Hal ini memicu disfungsi di mana sistem imun dapat memberikan stimulasi yang salah dan berbalik menyerang sel-sel sehat, yang berpotensi menyebabkan berbagai gangguan autoimun.",
     img: imgImmune,
     delay: 0.5
   }
@@ -27,7 +27,7 @@ const diseases = [
 
 export function DiseaseImpact() {
   return (
-    <section className="bg-background py-20 border-b border-border relative overflow-hidden">
+    <section className="bg-background pt-10 md:pt-16 pb-20 border-b border-border relative overflow-hidden">
       {/* Latar Belakang Subtle */}
       <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 blur-[120px] mix-blend-screen">
         <div className="h-[400px] w-[600px] rounded-full bg-danger/30" />
@@ -36,12 +36,12 @@ export function DiseaseImpact() {
       <div className="mx-auto max-w-7xl px-6 relative z-10">
         <Reveal>
           <div className="text-center mb-16">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-danger">Bagian 09 · Ancaman Tersembunyi</p>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-danger">BAGIAN 9 • DAMPAK KESEHATAN</p>
             <h2 className="mt-4 font-display text-4xl leading-tight text-foreground md:text-5xl max-w-4xl mx-auto">
-              Tiga <span className="italic text-gradient-blood">ancaman mematikan</span> di dalam tubuh kita.
+              Tiga Risiko Utama Mikroplastik bagi Tubuh Kita
             </h2>
             <p className="mt-6 text-sm leading-relaxed text-muted-foreground max-w-2xl mx-auto">
-              Begitu siklus mikroplastik usai dan menetap di dalam jaringan biologis kita, konsekuensinya bukan sekadar gangguan ringan. Berikut adalah tiga dampak medis utama menurut penelitian medis terkini.
+              Saat mikroplastik masuk dan terakumulasi dalam jaringan tubuh, dampaknya dapat memengaruhi kesehatan dalam jangka panjang. Berikut adalah tiga dampak medis utama menurut penelitian terkini (Bhuyan, 2022).
             </p>
           </div>
         </Reveal>
@@ -63,9 +63,6 @@ export function DiseaseImpact() {
                 </div>
                 
                 {/* Text Content */}
-                <h3 className="font-display text-2xl text-foreground mb-4 group-hover:text-danger transition-colors">
-                  {d.title}
-                </h3>
                 <p className="text-sm leading-relaxed text-muted-foreground max-w-sm">
                   {d.desc}
                 </p>

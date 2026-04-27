@@ -89,20 +89,18 @@ export function Calculator() {
               ].map((s) => (
                 <div
                   key={s.label}
-                  className={`rounded-md border p-5 ${
-                    s.highlight
+                  className={`rounded-md border p-5 ${s.highlight
                       ? "border-danger/40 bg-danger/5"
                       : "border-border bg-background/40"
-                  }`}
+                    }`}
                 >
                   <s.icon
                     className={`h-5 w-5 ${s.highlight ? "text-danger" : "text-muted-foreground"}`}
                     strokeWidth={1.5}
                   />
                   <p
-                    className={`mt-4 font-display text-4xl ${
-                      s.highlight ? "text-danger" : "text-foreground"
-                    }`}
+                    className={`mt-4 font-display text-4xl ${s.highlight ? "text-danger" : "text-foreground"
+                      }`}
                   >
                     <AnimatedNumber value={s.value} decimals={s.decimals} />
                   </p>
@@ -114,7 +112,17 @@ export function Calculator() {
             </div>
 
             <p className="mt-10 text-sm leading-relaxed text-muted-foreground">
-              Setiap kali indikator di atas dinaikkan, kita mewariskan lebih banyak jejak beracun bagi 16 generasi yang akan datang. (Asumsi 400 tahun plastik mengurai).
+              Setiap kenaikan pada indikator di atas menunjukkan akumulasi sampah yang akan menetap di lingkungan dalam waktu yang sangat lama. Berdasarkan asumsi waktu urai plastik selama 400 tahun, jejak ini dapat memengaruhi hingga 16 generasi mendatang.
+            </p>
+          </div>
+        </Reveal>
+        <Reveal delay={0.2}>
+          <div className="mt-16 text-center">
+            <p className="font-mono text-[10px] text-muted-foreground/60 uppercase tracking-widest">
+              Sumber Data
+            </p>
+            <p className="font-mono text-xs text-muted-foreground mt-2 max-w-xl mx-auto leading-relaxed">
+              Plastic Pollution Calculator dari University of Leeds (UNESCAP, 2023)
             </p>
           </div>
         </Reveal>

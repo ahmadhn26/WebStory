@@ -18,18 +18,18 @@ export function LeakageTrend() {
           {/* Teks di kiri — sticky */}
           <Reveal>
             <div className="md:w-72 shrink-0 md:sticky md:top-28">
-              <div className="infographic-section-header">Bagian 04 · Secercah Harapan</div>
+              <div className="infographic-section-header">BAGIAN 4 • TREN PENURUNAN SAMPAH</div>
               <h2 className="mt-2 font-display text-3xl leading-tight text-foreground md:text-4xl">
-                Langkah kecil menuju laut yang <span className="italic text-gradient-blood"> bersih</span>.
+                Upaya Pengurangan Sampah di Laut.
               </h2>
               <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                Meskipun masih didominasi plastik, ada tanda positif. Tren kebocoran sampah plastik ke laut di Indonesia menunjukkan <span className="text-foreground font-medium">penurunan stabil</span> sejak tahun 2018.
+                Meskipun tantangan sampah plastik masih besar, data menunjukkan perubahan positif. Tingkat kebocoran sampah plastik ke laut di Indonesia terus menurun secara bertahap sejak tahun 2018.
               </p>
               {/* Key stat */}
               <div className="mt-8 data-panel">
                 <div className="stat-callout">
                   <span className="value" style={{ color: 'var(--color-water)' }}>−35%</span>
-                  <span className="label">Penurunan Kebocoran 2018–2022</span>
+                  <span className="label">PENURUNAN TOTAL (2018–2022)</span>
                 </div>
               </div>
             </div>
