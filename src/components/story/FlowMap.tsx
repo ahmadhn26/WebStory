@@ -129,7 +129,7 @@ export function FlowMap() {
   const ranked = Object.entries(SEA_DATA).sort((a, b) => b[1].plastic - a[1].plastic);
 
   return (
-    <section className="bg-background py-32">
+    <section className="bg-background py-20">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">

@@ -94,22 +94,31 @@ const CustomTooltip = ({ active, payload, label }: any) => {
 
 export function DurationChart() {
   return (
-    <section className="bg-background py-32">
-      <div className="mx-auto max-w-6xl px-6">
-        <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
-            Babak 08 · Bahaya yang Mengintai
-          </p>
-          <h2 className="mt-4 max-w-3xl font-display text-4xl leading-tight text-foreground md:text-6xl">
-            Proyeksi Konsumsi Ikan <span className="italic">Kita</span>.
-          </h2>
-          <p className="mt-6 max-w-2xl text-base leading-relaxed text-muted-foreground md:text-lg">
-            Garis biru adalah realita, garis merah adalah peringatan. Data historis (2000–2024) bertemu dengan proyeksi Holt Double Exponential Smoothing (2025–2027), menunjukkan laju konsumsi ikan yang tak terbendung.
-          </p>
-        </Reveal>
+    <section className="bg-background py-20">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="flex flex-col md:flex-row gap-12 items-start">
+          {/* Teks kiri — sticky */}
+          <Reveal>
+            <div className="md:w-72 shrink-0 md:sticky md:top-28">
+              <div className="infographic-section-header">Babak 08 · Bahaya yang Mengintai</div>
+              <h2 className="mt-2 font-display text-3xl leading-tight text-foreground md:text-4xl">
+                Proyeksi Konsumsi Ikan <span className="italic">Kita</span>.
+              </h2>
+              <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+                Garis biru adalah realita, garis merah adalah peringatan. Proyeksi Holt Double Exponential Smoothing (2025–2027) menunjukkan laju yang tak terbendung.
+              </p>
+              <div className="mt-8 data-panel">
+                <div className="stat-callout">
+                  <span className="value" style={{ color: 'var(--color-danger)' }}>63.99 kg</span>
+                  <span className="label">Proyeksi 2027 / Kapita</span>
+                </div>
+              </div>
+            </div>
+          </Reveal>
 
-        <Reveal delay={0.2}>
-          <div className="mt-16 h-[420px] w-full">
+          {/* Chart di kanan — penuh */}
+          <Reveal delay={0.15} className="flex-1 w-full">
+            <div className="data-panel h-[500px] w-full">
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart
                 data={actualData}
@@ -239,7 +248,8 @@ export function DurationChart() {
             Konsumsi Ikan Indonesia (kg/kapita) · Sumber: BPS &amp; Proyeksi
             Holt Double Exponential Smoothing
           </p>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   );

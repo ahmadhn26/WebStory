@@ -50,13 +50,13 @@ const CustomTooltip = ({ active, payload }: any) => {
 
 export function Comparison() {
   return (
-    <section className="border-y border-border bg-card/40 py-32">
-      <div className="mx-auto max-w-6xl px-6">
+    <section className="border-y border-border bg-card/40 py-20">
+      <div className="mx-auto max-w-7xl px-6">
         <Reveal>
           <div className="flex flex-col md:flex-row gap-12 items-center">
             <div className="flex-1">
-              <p className="font-mono text-xs uppercase tracking-[0.3em] text-danger">Babak 07 · Hubungan Berbahaya</p>
-              <h2 className="mt-4 max-w-3xl font-display text-4xl leading-tight text-foreground md:text-5xl">
+              <div className="infographic-section-header">Babak 07 · Hubungan Berbahaya</div>
+              <h2 className="mt-2 max-w-3xl font-display text-4xl leading-tight text-foreground md:text-5xl">
                 Setiap <span className="italic text-gradient-blood">1 kg plastik</span> menghancurkan ekosistem laut kita.
               </h2>
               <div className="mt-8 rounded-lg border border-danger/30 bg-danger/5 p-6 backdrop-blur flex gap-4 items-start">
@@ -70,7 +70,7 @@ export function Comparison() {
               </div>
             </div>
             
-            <div className="flex-1 w-full h-[400px]">
+            <div className="data-panel flex-1 w-full h-[500px]">
               <ResponsiveContainer width="100%" height="100%">
                 <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />

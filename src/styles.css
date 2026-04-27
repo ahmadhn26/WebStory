@@ -44,38 +44,38 @@
 :root {
   --radius: 0.5rem;
 
-  /* Editorial Ocean palette: lighter blue background */
-  --background: #0f354a;
+  /* Infographic-inspired Ocean palette — medium teal, high contrast cards */
+  --background: #0b3347;         /* Slightly lighter / more teal */
   --foreground: #ffffff;
-  --card: #15455e;
+  --card: #1b5a78;               /* Noticeably lighter than bg — creates depth */
   --card-foreground: #ffffff;
-  --popover: #15455e;
+  --popover: #1b5a78;
   --popover-foreground: #ffffff;
-  --primary: #14a2c3;
-  --primary-foreground: #ffffff;
+  --primary: #17e6f3;
+  --primary-foreground: #0b3347;
   --secondary: #1a5675;
   --secondary-foreground: #ffffff;
   --muted: #1e6387;
-  --muted-foreground: #aeddf0;
+  --muted-foreground: #c4eaf7;   /* Brighter — better chart axis readability */
   --accent: #0a6180;
   --accent-foreground: #ffffff;
   --destructive: oklch(0.65 0.22 30);
   --destructive-foreground: oklch(0.98 0.01 80);
-  --border: #2376a1;
+  --border: #2a82b0;             /* Crisper borders */
   --input: #1e6387;
   --ring: #17e6f3;
 
   /* Story palette */
   --ink: #071f2e;
-  --ocean: #0f354a;
+  --ocean: #0b3347;
   --water: #17e6f3;
   --paper: #ffffff;
-  --coral: oklch(0.65 0.22 30); /* Kembali ke merah asli */
+  --coral: oklch(0.65 0.22 30);
 
   /* Segments for charts */
   --fish: #ade6e5;
-  --plastic: oklch(0.65 0.22 30); /* Merah untuk melambangkan bahaya plastik */
-  --danger: oklch(0.55 0.25 30); /* Merah gelap */
+  --plastic: oklch(0.65 0.22 30);
+  --danger: oklch(0.55 0.25 30);
 
   --chart-1: #17e6f3;
   --chart-2: var(--coral);
@@ -152,5 +152,63 @@
   @keyframes blink {
     0%, 50% { opacity: 1; }
     51%, 100% { opacity: 0; }
+  }
+
+  /* ── Infographic-style section header ─────────────────────────────────────── */
+  /* Usage: <div class="infographic-section-header">LABEL</div>                 */
+  .infographic-section-header {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  /* ── Data panel — chart area with elevated background ─────────────────────── */
+  .data-panel {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .data-panel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-water));
+  }
+
+  /* ── Big stat callout — large prominent number ─────────────────────────────── */
+  .stat-callout {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+  .stat-callout .value {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-primary);
+  }
+  .stat-callout .label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-muted-foreground);
   }
 }
