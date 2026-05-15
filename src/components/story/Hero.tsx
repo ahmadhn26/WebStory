@@ -35,7 +35,7 @@ export function Hero() {
           transition={{ duration: 1, delay: 0.3 }}
           className="font-mono text-xs uppercase tracking-[0.3em] text-muted-foreground"
         >
-          Visualisasi Data dan Informasi · Kelompok 2 3SD2
+          Visualisasi Data dan Informasi · Kelompok 1 3SD2
         </motion.p>
 
         <motion.h1

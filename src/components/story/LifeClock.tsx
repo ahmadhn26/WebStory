@@ -8,7 +8,7 @@ export function HealthImpact() {
       <div className="mx-auto max-w-7xl px-6">
         <Reveal>
           <div className="text-center mb-12">
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-danger">Bagian 08 · Lingkaran Setan</p>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-danger">Bagian 08 · Siklus Microplastik</p>
             <h2 className="mt-4 font-display text-4xl leading-tight text-foreground md:text-6xl max-w-4xl mx-auto">
               Plastik yang kita buang <br className="hidden md:block" />
               <span className="italic text-gradient-blood">meracuni piring kita sendiri</span>.
@@ -28,9 +28,9 @@ export function HealthImpact() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex justify-center"
             >
-              <img 
-                src={microplasticCycleImg} 
-                alt="Microplastic Cycle" 
+              <img
+                src={microplasticCycleImg}
+                alt="Microplastic Cycle"
                 className="w-full h-auto object-contain"
               />
             </motion.div>
